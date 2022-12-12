@@ -7,34 +7,54 @@
 
 import UIKit
 
+protocol Showable {
+    var callName: String { get }
+}
+
 class AnimalViewModel {
     
     private let service: Service = .init()
+    private let imcService: IMCService = .init()
     private var alert: Alert?
-    private var chosenAnimal: Animal?
-    private var animalsList: [Animal] = []
+    //    private var chosenAnimal: Animal?
+    //    private var animalsList: [Animal] = []
+    private var list: [Showable] = []
+    private var chosenItem: Showable?
+    
+    private func getListAll() {
+        list.append(imcService.getIMC())
+        list.append(contentsOf: service.getAnimals())
+        list.shuffle()
+    }
     
     func getList() {
-        let animalList = service.getAnimals().shuffled()
-        animalsList = animalList
+        getListAll()
     }
     
-    func getNumberOfAnimals() -> Int {
-        return animalsList.count
+    func getNumberOfList() -> Int {
+        return list.count
     }
     
-    func getCellViewModel(position: Int) -> Animal {
-        let animal = animalsList[position]
-        return animal
+    func getCellViewModel(position: Int) -> Showable {
+        let list = list[position]
+        return list
     }
     
     func alertDelegate(viewController: UIViewController) {
         alert = Alert(controller: viewController)
     }
     
-    func didSelectRow(position: Int ) {
-        let animal = animalsList[position]
-        alert?.getAlert(titulo: animal.name, mensagem: "Você, selecionou seu animal!")
-        chosenAnimal = animal
+    func didSelectRow(position: Int ) -> UIViewController?{
+        let option = list[position]
+        
+        if option.callName != imcService.getIMC().callName {
+            alert?.getAlert(titulo: option.callName, mensagem: "Você, selecionou seu animal!")
+            chosenItem = option
+            return nil
+        } else {
+            let vc: CalculateImcViewController = .init()
+            vc.viewModel.receiveInformation(imc: option as! IMC)
+            return vc
+        }
     }
 }

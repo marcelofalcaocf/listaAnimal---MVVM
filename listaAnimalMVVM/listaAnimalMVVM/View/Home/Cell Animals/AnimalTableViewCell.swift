@@ -33,8 +33,8 @@ class AnimalTableViewCell: UITableViewCell {
         contentView.addSubview(animalTableViewScreen)
     }
     
-    public func setUpCell(data: Animal) {
-        animalTableViewScreen.nameAnimalLabel.text = data.name
+    public func setUpCell(data: Showable) {
+        animalTableViewScreen.nameAnimalLabel.text = data.callName
     }
     
     required init?(coder: NSCoder) {

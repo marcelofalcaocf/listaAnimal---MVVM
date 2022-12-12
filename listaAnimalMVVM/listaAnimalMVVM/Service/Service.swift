@@ -9,19 +9,19 @@ import Foundation
 
 class Service {
     private let animals: [Animal] = [
-        Animal(name: "Spitz Alemão"),
-        Animal(name: "Bulldog Francês"),
-        Animal(name: "Shih Tzu"),
-        Animal(name: "Rottweiler"),
-        Animal(name: "Pug"),
-        Animal(name: "Golden Retriever"),
-        Animal(name: "Pastor Alemão"),
-        Animal(name: "Yorkshire Terrier"),
-        Animal(name: "Border Collier"),
-        Animal(name: "Fila Brasileiro")
+        Animal(callName: "Spitz Alemão"),
+        Animal(callName: "Bulldog Francês"),
+        Animal(callName: "Shih Tzu"),
+        Animal(callName: "Rottweiler"),
+        Animal(callName: "Pug"),
+        Animal(callName: "Golden Retriever"),
+        Animal(callName: "Pastor Alemão"),
+        Animal(callName: "Yorkshire Terrier"),
+        Animal(callName: "Border Collier"),
+        Animal(callName: "Fila Brasileiro")
     ]
     
     func getAnimals() -> [Animal] {
-        return animals.shuffled()
+        return animals
     }
 }

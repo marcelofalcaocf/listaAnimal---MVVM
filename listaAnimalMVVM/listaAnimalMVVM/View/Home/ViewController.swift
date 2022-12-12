@@ -22,17 +22,21 @@ class ViewController: UIViewController {
         viewModel.alertDelegate(viewController: self)
         viewModel.getList()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
 }
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.didSelectRow(position: indexPath.row)
+        navigationController?.pushViewController(viewModel.didSelectRow(position: indexPath.row) ?? UIViewController(), animated: true)
     }
 }
 
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.getNumberOfAnimals()
+        viewModel.getNumberOfList()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

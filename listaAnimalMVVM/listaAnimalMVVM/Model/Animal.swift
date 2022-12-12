@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct Animal {
-    let name: String
+struct Animal: Showable {
+    var callName: String
 }

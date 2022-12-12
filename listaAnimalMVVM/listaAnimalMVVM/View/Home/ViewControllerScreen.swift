@@ -18,8 +18,8 @@ class ViewControllerScreen: UIView {
         label.backgroundColor = .black
         label.layer.cornerRadius = 10
         label.clipsToBounds = true
-        label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.text = "Escolha o seu animal "
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.text = "Escolha o seu animal ou calcule seu IMC "
         return label
     }()
     
