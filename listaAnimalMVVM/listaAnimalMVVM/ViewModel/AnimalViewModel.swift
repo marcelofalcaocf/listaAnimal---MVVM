@@ -21,7 +21,6 @@ class AnimalViewModel {
     private let service: Service = .init()
     private let imcService: IMCService = .init()
     private var list: [Showable] = []
-    private var chosenItem: Showable?
     private var delegate: AnimalviewModelProtocol?
     
     private func getListAll() {
@@ -54,8 +53,6 @@ class AnimalViewModel {
             delegate?.passView(imc: imcOption)
         } else {
             delegate?.activateAlert(name: option.callName)
-            chosenItem = option
         }
     }
-    
 }
