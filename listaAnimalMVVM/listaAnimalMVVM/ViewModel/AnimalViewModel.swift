@@ -50,13 +50,12 @@ class AnimalViewModel {
     public func didSelectRow(position: Int ) {
         let option = list[position]
         
-        if option.callName != imcService.getIMC().callName {
+        if let imcOption = option as? IMC {
+            delegate?.passView(imc: imcOption)
+        } else {
             delegate?.activateAlert(name: option.callName)
             chosenItem = option
-        } else {
-            if let imcOption = option as? IMC {
-                delegate?.passView(imc: imcOption)
-            }
         }
     }
+    
 }
