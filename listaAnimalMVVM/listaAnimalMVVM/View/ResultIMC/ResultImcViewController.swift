@@ -32,13 +32,21 @@ extension ResultImcViewController : ResultImcScreenProtocol {
     }
     
     func actionNewCalculation() {
-        let vc: CalculateImcViewController = .init()
-//        navigationController?.popViewController(animated: false)
-        navigationController?.pushViewController(vc, animated: false)
+        viewModel.backToPreviousView()
+//        let vc: CalculateImcViewController = .init()
+////        navigationController?.popViewController(animated: false)
+//        navigationController?.pushViewController(vc, animated: false)
     }
 }
 
 extension ResultImcViewController: ResultViewModelProtocol {
+    func backView(imc: IMC) {
+        let vc: CalculateImcViewController = .init()
+//        navigationController?.popViewController(animated: false)
+        vc.viewModel.receiveInformation(imc: imc)
+        navigationController?.pushViewController(vc, animated: false)
+    }
+    
     func thinnessResult() {
         viewScreen.viewThinnessResult(valueIMC: viewModel.updateView())
     }

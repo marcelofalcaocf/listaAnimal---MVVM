@@ -13,6 +13,7 @@ protocol ResultViewModelProtocol {
     func idealResult()
     func overweightResult()
     func obesityResult()
+    func backView(imc: IMC)
 }
 
 class ResultViewModel {
@@ -49,6 +50,11 @@ class ResultViewModel {
             } else {
                 delegate?.obesityResult()
             }
+    }
+    
+    public func backToPreviousView() {
+        guard let imc = resultImc else { return }
+        delegate?.backView(imc: imc)
     }
 }
 
