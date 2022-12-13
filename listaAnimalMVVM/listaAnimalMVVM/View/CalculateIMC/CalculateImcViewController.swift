@@ -31,7 +31,6 @@ extension CalculateImcViewController: CalculateImcScreenProtocol {
     
     func actionCalculateButton() {
         viewModel.calculationIMC(weightText: viewScreen.passWeight(), heightText: viewScreen.passHeight())
-        print("funcionando")
     }
 }
 
