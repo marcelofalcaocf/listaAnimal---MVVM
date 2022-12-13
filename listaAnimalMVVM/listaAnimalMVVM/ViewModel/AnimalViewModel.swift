@@ -5,14 +5,14 @@
 //  Created by Marcelo Falcao Costa Filho on 01/12/22.
 //
 
-import UIKit
+import Foundation
 
 protocol Showable {
     var callName: String { get }
 }
 
 protocol AnimalviewModelProtocol {
-    func passView()
+    func passView(imc: IMC)
     func activateAlert(name: String)
 }
 
@@ -55,9 +55,7 @@ class AnimalViewModel {
             chosenItem = option
         } else {
             if let imcOption = option as? IMC {
-                let vc: CalculateImcViewController = .init()
-                vc.viewModel.receiveInformation(imc: imcOption)
-                delegate?.passView()
+                delegate?.passView(imc: imcOption)
             }
         }
     }

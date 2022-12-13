@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CalculateViewModelProtocol {
-    func passValue()
+    func passValue(imc: IMC, double: Double)
 }
 
 class CalculateViewModel {
@@ -27,20 +27,13 @@ class CalculateViewModel {
     }
     
     func calculationIMC(weightText: String, heightText: String) {
-        if let weight = Double(weightText), let height = Double(heightText) {
+        if let weight = Double(weightText), let height = Double(heightText), let imc = imc {
             
-            imc?.weight = weight
-            imc?.height = height
+            self.imc?.weight = weight
+            self.imc?.height = height
             let valueImc: Double = weight / (height * height)
             self.valueImc = valueImc
-                delegate?.passValue()
-        }
-    }
-    
-    func passInformationToScreen() {
-        if let imc = imc, let valueImc = valueImc {
-            let vc: ResultImcViewController = .init()
-            vc.viewModel.receiveInformationForResult(imc: imc, resultValue: valueImc)
+            delegate?.passValue(imc: imc, double: valueImc)
         }
     }
 }

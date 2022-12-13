@@ -36,8 +36,9 @@ extension ViewController: AnimalviewModelProtocol {
         alert?.getAlert(titulo: name, mensagem: "Você, selecionou seu animal!")
     }
     
-    func passView() {
+    func passView(imc: IMC) {
         let vc: CalculateImcViewController = .init()
+        vc.viewModel.receiveInformation(imc: imc)
         navigationController?.pushViewController(vc, animated: false)
     }
 }
