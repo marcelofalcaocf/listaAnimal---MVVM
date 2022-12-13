@@ -20,7 +20,6 @@ class AnimalViewModel {
     
     private let service: Service = .init()
     private let imcService: IMCService = .init()
-//    private var alert: Alert?
     private var list: [Showable] = []
     private var chosenItem: Showable?
     private var delegate: AnimalviewModelProtocol?
@@ -48,22 +47,17 @@ class AnimalViewModel {
         return list
     }
     
-//    public func alertDelegate(viewController: UIViewController) {
-//        alert = Alert(controller: viewController)
-//    }
-    
     public func didSelectRow(position: Int ) {
         let option = list[position]
         
         if option.callName != imcService.getIMC().callName {
             delegate?.activateAlert(name: option.callName)
-//            alert?.getAlert(titulo: option.callName, mensagem: "Você, selecionou seu animal!")
             chosenItem = option
         } else {
             if let imcOption = option as? IMC {
                 let vc: CalculateImcViewController = .init()
                 vc.viewModel.receiveInformation(imc: imcOption)
-                
+                delegate?.passView()
             }
         }
     }

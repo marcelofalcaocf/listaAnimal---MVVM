@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         viewScreen.delegateTableView(delegate: self, dataSource: self)
 //        viewModel.alertDelegate(viewController: self)
-        alert?.controller = self
+        alert = Alert(controller: self)
         viewModel.getList()
         viewModel.delegate(delegate: self)
     }

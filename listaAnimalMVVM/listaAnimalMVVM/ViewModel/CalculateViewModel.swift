@@ -38,11 +38,9 @@ class CalculateViewModel {
     }
     
     func passInformationToScreen() {
-        let vc: ResultImcViewController = .init()
-        if let imc = imc , let valueImc = valueImc {
-        
+        if let imc = imc, let valueImc = valueImc {
+            let vc: ResultImcViewController = .init()
             vc.viewModel.receiveInformationForResult(imc: imc, resultValue: valueImc)
         }
-
     }
 }
