@@ -9,6 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    private var alert: Alert?
     lazy var viewScreen: ViewControllerScreen = .init()
     var viewModel = AnimalViewModel()
     
@@ -19,8 +20,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewScreen.delegateTableView(delegate: self, dataSource: self)
-        viewModel.alertDelegate(viewController: self)
+//        viewModel.alertDelegate(viewController: self)
+        alert?.controller = self
         viewModel.getList()
+        viewModel.delegate(delegate: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,9 +31,20 @@ class ViewController: UIViewController {
     }
 }
 
+extension ViewController: AnimalviewModelProtocol {
+    func activateAlert(name: String) {
+        alert?.getAlert(titulo: name, mensagem: "Você, selecionou seu animal!")
+    }
+    
+    func passView() {
+        let vc: CalculateImcViewController = .init()
+        navigationController?.pushViewController(vc, animated: false)
+    }
+}
+
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(viewModel.didSelectRow(position: indexPath.row) ?? UIViewController(), animated: true)
+        viewModel.didSelectRow(position: indexPath.row)
     }
 }
 

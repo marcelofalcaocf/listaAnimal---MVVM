@@ -33,17 +33,16 @@ class CalculateViewModel {
             imc?.height = height
             let valueImc: Double = weight / (height * height)
             self.valueImc = valueImc
-            delegate?.passValue()
+                delegate?.passValue()
         }
     }
     
-    func passInformationToScreen() -> UIViewController {
+    func passInformationToScreen() {
         let vc: ResultImcViewController = .init()
         if let imc = imc , let valueImc = valueImc {
         
             vc.viewModel.receiveInformationForResult(imc: imc, resultValue: valueImc)
-            return vc
         }
-        return UIViewController()
+
     }
 }

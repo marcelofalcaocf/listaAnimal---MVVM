@@ -47,8 +47,8 @@ extension CalculateImcViewController: UITextFieldDelegate {
 
 extension CalculateImcViewController: CalculateViewModelProtocol {
     func passValue() {
-        navigationController?.pushViewController(viewModel.passInformationToScreen(), animated: false)
+        viewModel.passInformationToScreen()
+        let vc: ResultImcViewController = .init()
+        navigationController?.pushViewController(vc, animated: false)
     }
-    
-    
 }
