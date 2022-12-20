@@ -11,46 +11,42 @@ protocol Showable {
     var callName: String { get }
 }
 
-protocol AnimalviewModelProtocol {
-    func passView(imc: IMC)
+protocol HomeviewModelProtocol {
+    func passViewIMC(imc: IMC)
     func activateAlert(name: String)
+    func passViewLicense(license: LicensePlate)
 }
 
-class AnimalViewModel {
+class HomeViewModel {
     
     private let service: Service = .init()
-    private let imcService: IMCService = .init()
-    private var list: [Showable] = []
-    private var delegate: AnimalviewModelProtocol?
+    private var delegate: HomeviewModelProtocol?
+    private var listAll: [Showable] = []
     
-    private func getListAll() {
-        list.append(imcService.getIMC())
-        list.append(contentsOf: service.getAnimals())
-        list.shuffle()
+    func getList() {
+        listAll.append(contentsOf: service.getList())
     }
     
-    public func delegate(delegate: AnimalviewModelProtocol?) {
+    public func delegate(delegate: HomeviewModelProtocol?) {
         self.delegate = delegate
     }
     
-    public func getList() {
-        getListAll()
-    }
-    
     public func getNumberOfList() -> Int {
-        return list.count
+        return listAll.count
     }
     
     public func getCellViewModel(position: Int) -> Showable {
-        let list = list[position]
+        let list = listAll[position]
         return list
     }
     
     public func didSelectRow(position: Int ) {
-        let option = list[position]
+        let option = listAll[position]
         
         if let imcOption = option as? IMC {
-            delegate?.passView(imc: imcOption)
+            delegate?.passViewIMC(imc: imcOption)
+        } else if let licenseOption = option as? LicensePlate {
+            delegate?.passViewLicense(license: licenseOption)
         } else {
             delegate?.activateAlert(name: option.callName)
         }

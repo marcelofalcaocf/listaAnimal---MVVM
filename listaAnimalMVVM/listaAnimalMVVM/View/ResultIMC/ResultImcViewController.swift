@@ -26,7 +26,7 @@ class ResultImcViewController: UIViewController {
 
 extension ResultImcViewController : ResultImcScreenProtocol {
     func actionBackButton() {
-        let vc: ViewController = .init()
+        let vc: HomeViewController = .init()
 //        navigationController?.popToRootViewController(animated: false)
         navigationController?.pushViewController(vc, animated: false)
     }

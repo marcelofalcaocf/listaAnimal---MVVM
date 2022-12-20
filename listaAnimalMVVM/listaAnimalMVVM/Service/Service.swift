@@ -8,7 +8,8 @@
 import Foundation
 
 class Service {
-    private let animals: [Animal] = [
+    
+    private let list: [Showable] = [
         Animal(callName: "Spitz Alemão"),
         Animal(callName: "Bulldog Francês"),
         Animal(callName: "Shih Tzu"),
@@ -18,10 +19,12 @@ class Service {
         Animal(callName: "Pastor Alemão"),
         Animal(callName: "Yorkshire Terrier"),
         Animal(callName: "Border Collier"),
-        Animal(callName: "Fila Brasileiro")
-    ]
-    
-    func getAnimals() -> [Animal] {
-        return animals
+        Animal(callName: "Fila Brasileiro"),
+        IMC(callName: "IMC - Calcular"),
+        LicensePlate(callName: "Placa De Carro - Rodízio")
+    ].shuffled()
+
+    func getList() -> [Showable] {
+        return list
     }
 }

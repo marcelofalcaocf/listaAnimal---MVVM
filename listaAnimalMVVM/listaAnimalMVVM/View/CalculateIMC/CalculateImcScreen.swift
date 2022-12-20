@@ -160,11 +160,6 @@ class CalculateImcScreen: UIView {
         return height
     }
     
-    public func configInitialView() {
-        weightTextField.text = nil
-        heightTextField.text = nil
-    }
-    
     private func configButtonEnabel(_ enabel: Bool) {
         if enabel {
             calculateButton.setTitleColor(.white, for: .normal)

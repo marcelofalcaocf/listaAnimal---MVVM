@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewControllerScreen: UIView {
+class HomeViewControllerScreen: UIView {
 
     lazy var welcomeLabel: UILabel = {
         let label = UILabel()
