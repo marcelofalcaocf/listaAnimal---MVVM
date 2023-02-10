@@ -17,67 +17,87 @@ class ResultLicenseViewModel {
         licensePlate = license
     }
     
-    func getDayOfWeek() -> String {
-        let dayToday: String = currentData.dayofTheWeek
-//        print(dayToday)
+    func getDayOfWeek() -> Int {
+        let dayToday: Int = currentData.dayofTheWeek
+        //        print(dayToday)
         return dayToday
     }
     
-    func presentingInformation() {
-        guard let positionDay = currentData.daysOfTheWeek.firstIndex(of: validateDay()) else { return }
+    private func validateDay() -> Int {
+        guard let license = licensePlate?.licensePlate else { return 6 }
         
-        for day in currentData.daysOfTheWeek {
-            if day == getDayOfWeek() {
-                if day == validateDay() {
-                    print("Hoje")
-                    break
-                }
-            } else if validateDay() == currentData.daysOfTheWeek[positionDay] && day == validateDay() {
-                print ("Amanha")
-                break
-            } else if validateDay() == currentData.daysOfTheWeek[positionDay + 1] && day == validateDay(){
-                print ("Depois de amanha")
-                break
-            } else if validateDay() == currentData.daysOfTheWeek[positionDay + 2] && day == validateDay() {
-                print ("Daqui a 3 dias")
-                break
-            }
+        if license.last == "1" || license.last == "2" {
+            return 1
+        } else if license.last == "3" || license.last == "4" {
+            return 2
+        } else if license.last == "5" || license.last == "6" {
+            return 3
+        } else if license.last == "7" || license.last == "8" {
+            return 4
+        } else if license.last == "9" || license.last == "0" {
+            return 5
+        } else {
+            return 6
         }
     }
     
-    private func validateDay() -> String {
-        guard let license = licensePlate?.licensePlate else { return "Sem validação" }
-        
-                if license.last == "1" || license.last == "2" {
-                    return "Segunda"
-                } else if license.last == "3" || license.last == "4" {
-                    return "Terça"
-                } else if license.last == "5" || license.last == "6" {
-                    return "Quarta"
-                } else if license.last == "7" || license.last == "8" {
-                    return "Quinta"
-                } else {
-                    return "Sexta"
-                }
+    func presentingInformation() -> String {
+        if getDayOfWeek() == validateDay() {
+            return "Hoje"
+        } else if getDayOfWeek() + 1 == validateDay() {
+            return "Amanha"
+        } else if getDayOfWeek() + 2 == validateDay() {
+            return "Depois de amanhã"
+        } else if getDayOfWeek() + 3 == validateDay() {
+            return "Daqui 3 dias"
+        } else {
+            return "Você não pode usar seu carro nos próximos 3 dias"
+        }
     }
-    
 }
 
 extension Date {
-    var dayofTheWeek: String {
-         let dayNumber = Calendar.current.component(.weekday, from: self)
-         // day number starts from 1 but array count from 0
-         return daysOfTheWeek[dayNumber - 1]
+    var dayofTheWeek: Int {
+        let dayNumber = Calendar.current.component(.weekday, from: self)
+        // day number starts from 1 but array count from 0
+        //         return daysOfTheWeek[dayNumber - 1]
+        return dayNumber - 1
     }
-
+    
     var daysOfTheWeek: [String] {
-         return  ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado"]
+        return  ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado"]
     }
- }
+}
 
 
-//func getDayOfWeek(today: String) -> String {
-//    var dayNow: String = currentData.dayofTheWeek
-//    print(dayNow)
-//    return dayNow
-//}
+//    func presentingInformation() -> String {
+//        guard let positionDay = currentData.daysOfTheWeek.firstIndex(of: validateDay()) else { return "" }
+//        var days: String = ""
+//
+//        guard let positionDay = currentData
+//        for day in currentData.daysOfTheWeek {
+//                if day == validateDay() {
+//                    if day == getDayOfWeek() {
+//                        print("Voce pode sair hj: \(day)")
+//                    } else if day == currentData.daysOfTheWeek[positionDay] {
+//                        print("Amanha" )
+//                               } else if day == currentData.daysOfTheWeek[positionDay + 1] {
+//                            print("Depois de amanha")
+//                        }
+//                    let day = " - Você pode sair com seu carro: \(day)"
+//                    days += day
+//                } else {
+//                let notDay = day
+//                days += "- \(notDay)"
+//            }
+//        }
+//        return days
+//    }
+
+//    func presentingInformation() {
+//        for (index, element) in currentData.daysOfTheWeek.enumerated() {
+//            if validateDay() == index {
+//                print("Você pode usar seu carro")
+//            }
+//        }
+//    }

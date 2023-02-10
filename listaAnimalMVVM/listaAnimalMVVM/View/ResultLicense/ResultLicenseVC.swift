@@ -18,8 +18,14 @@ class ResultLicenseVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.presentingInformation()
-        // Do any additional setup after loading the view.
+        viewScreen.delegate(delegate: self)
+        viewScreen.configExplanationLabel(result: viewModel.presentingInformation())
     }
 
+}
+
+extension ResultLicenseVC: ResultLicenseScreenProtocol {
+    func actionBackButton() {
+        navigationController?.popViewController(animated: false)
+    }
 }

@@ -35,10 +35,10 @@ class SearchLicenseViewModel {
             license?.licensePlate = value
             guard let license = license else {return }
             delegate?.passViewResultValue(license: license)
-            // to do: ir para proxima view e passar a informacao do textfield
+            // TODO: ir para proxima view e passar a informacao do textfield
         } else {
             delegate?.activateAlertError(information: "Verifique se as letras estão maiúsculas, caracteres especiais e placa correta")
-            // to do: alert "verifique se as letras estao maiusculas, se nao tem caracteres especiais e se a placa está correta"
+            // TODO: alert "verifique se as letras estao maiusculas, se nao tem caracteres especiais e se a placa está correta"
         }
     }
 }
